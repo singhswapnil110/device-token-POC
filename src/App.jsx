@@ -5,26 +5,33 @@ import './App.css'
 import { UAParser } from 'ua-parser-js';
 
 function App() {
-  const parsedResults = UAParser(navigator.userAgent);
-  console.log(parsedResults);
+  const {browser, device, os} = UAParser(navigator.userAgent);
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+       <h2>Device Token POC</h2>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <p>
+        Browser 
+        <ul>
+          <li>Name: {browser.name}</li>
+          <li>Version: {browser.version}</li>
+        </ul>
+      </p>
+      <p>
+        Device 
+        <ul>
+          <li>Vendor: {device.vendor}</li>
+          <li>Model: {device.model}</li>
+          <li>Type: {device.type}</li>
+        </ul>
+      </p>
+      <p>
+        OS 
+        <ul>
+          <li>Name: {os.name}</li>
+          <li>Version: {os.version}</li>
+        </ul>
+      </p>  
       </div>
     </>
   )
