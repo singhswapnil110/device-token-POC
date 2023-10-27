@@ -48,12 +48,12 @@ function App() {
         osVersion: os.version
     }
     console.log(dataObj);
-    fetch(constants.API_ENDPOINT_URL,{
-      method: "POST",
-      mode: "cors",
-      body: JSON.stringify(dataObj),
-    }).then(res => console.log(res));
-    //axios.post(constants.API_ENDPOINT_URL, dataObj).then(res => console.log(res));
+    // fetch(constants.API_ENDPOINT_URL,{
+    //   method: "POST",
+    //   mode: "cors",
+    //   body: JSON.stringify(dataObj),
+    // }).then(res => console.log(res));
+    axios.post(constants.API_ENDPOINT_URL, dataObj).then(res => console.log(res));
   }
 
   useEffect(()=>{
