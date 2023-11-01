@@ -95,7 +95,7 @@ function App() {
       <h2>Device Tokenization POC</h2>
       <div>
       <h4>Visitor ID: {userId.libId}</h4>
-      <h4>Email ID: {localStorage.getItem(userId.libId) ? localStorage.getItem(userId.libId) : "Email ID not yet set"}</h4>
+      <h4>Email ID: {localStorage.getItem(userId.libId) ? localStorage.getItem(userId.libId) : "Not yet set"}</h4>
       </div>
       <p>Thank you for being part of this POC, please enter your Razorpay email id below and submit the form</p>
       <div className='form'>
