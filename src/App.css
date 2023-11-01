@@ -1,21 +1,12 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+body{
+  height: 100vh;
+  width: 100vw;
+  color: black;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+* {
+  box-sizing: border-box;
+  text-align: center;
 }
 
 @keyframes logo-spin {
@@ -37,6 +28,76 @@
   padding: 2em;
 }
 
-.read-the-docs {
-  color: #888;
+.bg-wrapper{
+  position: absolute;
+  height: 35%;
+  width: 100%;
+  top:0;
+  background: linear-gradient(0deg, #7EDEFF -70.29%, #0041B1 100%);
+}
+
+.page-wrapper{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  background: #F5F5F5;
+}
+
+.page-container{
+  height: 100%;
+  width: 100%;
+  max-width: 500px;
+  max-height: 600px;
+  display: grid;
+  grid-template-rows: 1fr 2fr 1fr 3fr 2fr;
+  padding: 20px;
+  z-index: 2;
+  border-radius: 4px;
+  border: 1px solid #DDD;
+  background: #FFF;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.10);
+}
+
+.form{
+  display: grid;
+  place-items: center;
+}
+
+.form input{
+  border: 1px solid #3395FF;
+  padding: 10px;
+  width: 80%;
+}
+
+.form button{
+  width: 60%;
+  padding: 10px;
+  background: #005BF2;
+  color: white;
+  font-weight: 600;
+  border-radius: 4px;
+  appearance: none;
+}
+
+button, input, input[type="reset"] {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+.table-wrapper{
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  border: 1px solid blue;
+}
+
+table{
+  width: 100%;
 }

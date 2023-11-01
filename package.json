@@ -10,7 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@fingerprintjs/fingerprintjs": "^4.1.0",
+    "@fingerprintjs/fingerprintjs-pro": "^3.8.6",
+    "@fingerprintjs/fingerprintjs-pro-react": "^2.6.1",
+    "@mui/material": "^5.14.16",
     "axios": "^1.5.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
