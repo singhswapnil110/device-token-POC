@@ -1,5 +1,5 @@
 export var constants = {
-    API_ENDPOINT_URL: "https://uatacs.izealiant.com:444/api/v1/deviceDetail",
+    API_ENDPOINT_URL: "https://uatacs.izealiant.com:444/api/v1/deviceDetails",
     SUCCESS_TEXT: {
         message: "Data saved successfully",
         severity: "success"
