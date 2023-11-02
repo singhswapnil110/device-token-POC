@@ -15,12 +15,14 @@ const Alert = forwardRef(function Alert(props, ref) {
 
 function App() {
   const resultBrowser = UAParser(navigator.userAgent);
-  const {browser, os} = resultBrowser;
+  const {browser, os, device} = resultBrowser;
   const {current: userId} = useRef({
     libId: null,
     inbuiltFunId: null,
   });
+
   const [open, setOpen] = useState(false);
+  const [isFormSubmitted, setFormSubmitted] = useState(false);
   
   const [collectionTime, setCollectionTime] = useState(null);
   const [userEmail, setUserEmail] = useState("");
@@ -66,23 +68,29 @@ function App() {
         fingerPrintId: userId.libId,
         collectionTime: collectionTime,
         osName: os.name,
-        osVersion: os.version
+        osVersion: os.version,
+        deviceType: device.type ? device.type : "PC"
     }
-    console.log(dataObj);
+    //console.log(dataObj);
     // fetch(constants.API_ENDPOINT_URL,{
     //   method: "POST",
     //   mode: "cors",
     //   body: JSON.stringify(dataObj),
     // }).then(res => console.log(res));
-    axios.post(constants.API_ENDPOINT_URL, dataObj).then(res => console.log(res)).then(()=>setOpen(true))
+    if(userId.libId && userEmail.trim()!="") {
+    axios.post(constants.API_ENDPOINT_URL, dataObj)
+    .then(res => console.log(res))
+    .then(()=>setOpen(true))
     .then(()=>localStorage.setItem(userId.libId, userEmail))
-    .then(()=>setAlert(constants.SUCCESS_TEXT))
+    .then(()=> setAlert(constants.SUCCESS_TEXT))
+    .then(()=> setFormSubmitted(true))
     .catch((err)=> 
     {
-      if(err.response.status != 200)
+      if(err.response?.status != 200)
       setOpen(true);
       setAlert(constants.FAILURE_TEXT)
     });
+  }
   }
 
   useEffect(()=>{
@@ -109,14 +117,15 @@ function App() {
     </Snackbar>
     <div className='page-container'>
       <h2>Device Tokenization POC</h2>
-      <div>
-      <h4>Visitor ID: {userId.libId}</h4>
-      <h4>Email ID: {localStorage.getItem(userId.libId) ? localStorage.getItem(userId.libId) : "Not yet set"}</h4>
-      </div>
       <p>Thank you for being part of this POC, please enter your Razorpay email id below and submit the form</p>
       <div className='form'>
-        <input type='email' onChange={e => setUserEmail(e.target.value)} value={userEmail} required/>
-        <button type='submit' onClick={onSubmit}>Submit</button>
+        { !isFormSubmitted ?
+        <form>
+          <input type='email' onChange={e => setUserEmail(e.target.value)} value={userEmail} required/>
+          <button type='submit' onClick={e => {onSubmit(); e.preventDefault();}}>Submit</button>
+        </form> :
+        <h3>Your Visitor ID: {userId.libId}</h3>
+        }
       </div>
       <div className="table-wrapper">
         <table>
