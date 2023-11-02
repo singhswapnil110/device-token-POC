@@ -24,6 +24,10 @@ function App() {
   
   const [collectionTime, setCollectionTime] = useState(null);
   const [userEmail, setUserEmail] = useState("");
+  const [alert, setAlert] = useState({
+    message:"",
+    severity:""
+  })
   
   const loadFingerprintJS = async () => {
     var startTime = performance.now();
@@ -31,6 +35,7 @@ function App() {
       apiKey: "LH67Rb3XyyqIX68Q0t08",
       region: 'ap',
     });
+    try{
     const fp = await fpPromise
     const result = await fp.get()
     var endTime = performance.now();
@@ -39,6 +44,10 @@ function App() {
     userId.libId = result.visitorId; 
     if(collectionTime==null)
     setCollectionTime(timeTaken);
+    } catch (err) {
+      setAlert(constants.LOAD_FAILURE);
+      setOpen(true);
+    }
   };
 
   const getFingerprintInbuilt = async () => {
@@ -66,7 +75,14 @@ function App() {
     //   body: JSON.stringify(dataObj),
     // }).then(res => console.log(res));
     axios.post(constants.API_ENDPOINT_URL, dataObj).then(res => console.log(res)).then(()=>setOpen(true))
-    .then(()=>localStorage.setItem(userId.libId, userEmail));
+    .then(()=>localStorage.setItem(userId.libId, userEmail))
+    .then(()=>setAlert(constants.SUCCESS_TEXT))
+    .catch((err)=> 
+    {
+      if(err.response.status != 200)
+      setOpen(true);
+      setAlert(constants.FAILURE_TEXT)
+    });
   }
 
   useEffect(()=>{
@@ -87,8 +103,8 @@ function App() {
       autoHideDuration={2000}
       onClose={()=>setOpen(false)}
     >
-       <Alert onClose={()=>setOpen(false)} severity="success" sx={{ width: '100%' }}>
-       Data Submitted Successfully
+       <Alert onClose={()=>setOpen(false)} severity={alert.severity} sx={{ width: '100%' }}>
+       {alert.message}
         </Alert>
     </Snackbar>
     <div className='page-container'>
@@ -99,7 +115,7 @@ function App() {
       </div>
       <p>Thank you for being part of this POC, please enter your Razorpay email id below and submit the form</p>
       <div className='form'>
-        <input type='email' onChange={e => setUserEmail(e.target.value)} value={userEmail}/>
+        <input type='email' onChange={e => setUserEmail(e.target.value)} value={userEmail} required/>
         <button type='submit' onClick={onSubmit}>Submit</button>
       </div>
       <div className="table-wrapper">
