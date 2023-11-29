@@ -34,7 +34,7 @@ function App() {
   const loadFingerprintJS = async () => {
     var startTime = performance.now();
     const fpPromise = FingerprintJS.load({
-      apiKey: "UzGPmO4lOVOVVYVHwsIT",
+      apiKey: "cMTiN9jLXq2r5GUrEjf3",
       region: 'ap',
     });
     try{
