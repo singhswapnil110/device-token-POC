@@ -97,7 +97,7 @@ function App() {
     loadFingerprintJS();
     console.log("Current  " + window.location)
     console.log("Parent  " + window.parent.location)
-    if(window.location !== window.parent.location)
+    if(window.self !== window.top)
       console.log("Iframe detected")
     else
       console.log("Normal Window")
