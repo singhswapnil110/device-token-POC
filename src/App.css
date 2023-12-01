@@ -2,8 +2,6 @@ body{
   height: 100vh;
   width: 100vw;
   color: black;
-  display: grid;
-  align-items: center;
 }
 
 * {
@@ -112,9 +110,4 @@ button, input, input[type="reset"] {
 
 table{
   width: 100%;
-}
-
-iframe {
-  height: 500px;
-  width: 400px;
 }
