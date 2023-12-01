@@ -95,6 +95,12 @@ function App() {
 
   useEffect(()=>{
     loadFingerprintJS();
+    console.log("Current  " + window.location)
+    console.log("Parent  " + window.parent.location)
+    if(window.location !== window.parent.location)
+      console.log("Iframe detected")
+    else
+      console.log("Normal Window")
   },[]);
 
   // useEffect(()=>{
